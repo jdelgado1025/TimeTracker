@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.API", "TimeTracker.API\TimeTracker.API.csproj", "{028E60D0-F2B8-471A-B89D-C645B0B4DFFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.Domain", "TimeTracker.Domain\TimeTracker.Domain.csproj", "{213BCBBA-3EAD-4C47-877F-A3F612780770}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{028E60D0-F2B8-471A-B89D-C645B0B4DFFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{028E60D0-F2B8-471A-B89D-C645B0B4DFFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{028E60D0-F2B8-471A-B89D-C645B0B4DFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{028E60D0-F2B8-471A-B89D-C645B0B4DFFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213BCBBA-3EAD-4C47-877F-A3F612780770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213BCBBA-3EAD-4C47-877F-A3F612780770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213BCBBA-3EAD-4C47-877F-A3F612780770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213BCBBA-3EAD-4C47-877F-A3F612780770}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
