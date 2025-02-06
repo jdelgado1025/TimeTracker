@@ -9,5 +9,7 @@ namespace TimeTracker.Domain.Models.TimeEntry;
 /* Data Transfer Object for Time Entry Request */
 public class TimeEntryCreateRequest
 {
-    
+    public required string Project { get; set; }
+    public DateTime Start { get; set; } = DateTime.Now;
+    public DateTime? End { get; set; }
 }
