@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TimeTracker.API.Repositories.Time_Entry;
+using TimeTracker.API.Services;
 using TimeTracker.Domain.Entities;
+using TimeTracker.Domain.Models.TimeEntry;
 
 namespace TimeTracker.API.Controllers;
 
@@ -9,25 +11,25 @@ namespace TimeTracker.API.Controllers;
 [ApiController]
 public class TimeEntryController : ControllerBase
 {
-    private readonly ITimeEntryRepository _timeEntryRepo;
+    private readonly ITimeEntryService _timeEntryService;
 
-    public TimeEntryController(ITimeEntryRepository timeEntryRepo)
+    public TimeEntryController(ITimeEntryService timeEntryService)
     {
-        _timeEntryRepo = timeEntryRepo;
+        _timeEntryService = timeEntryService;
     }
 
     [HttpGet]
-    public ActionResult<List<TimeEntry>> GetAllTimeEntries()
+    public ActionResult<List<TimeEntryResponse>> GetAllTimeEntries()
     {
-        return Ok(_timeEntryRepo.GetAllTimeEntries());
+        return Ok(_timeEntryService.GetAllTimeEntries());
     }
 
     [HttpPost]
-    public ActionResult<List<TimeEntry>> CreateTimeEntry(TimeEntry timeEntry)
+    public ActionResult<List<TimeEntryResponse>> CreateTimeEntry(TimeEntryCreateRequest timeEntry)
     {
         if (timeEntry == null)
             return BadRequest("Invalid Time Entry");
 
-        return Ok(_timeEntryRepo.CreateTimeEntry(timeEntry));
+        return Ok(_timeEntryService.CreateTimeEntry(timeEntry));
     }
 }
