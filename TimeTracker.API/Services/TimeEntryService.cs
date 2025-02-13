@@ -1,4 +1,5 @@
-﻿using TimeTracker.API.Repositories.Time_Entry;
+﻿using Mapster;
+using TimeTracker.API.Repositories.Time_Entry;
 using TimeTracker.Domain.Entities;
 using TimeTracker.Domain.Models.TimeEntry;
 
@@ -13,34 +14,17 @@ public class TimeEntryService : ITimeEntryService
         _timeEntryRepo = timeEntryRepo;
     }
 
-    public List<TimeEntryResponse> CreateTimeEntry(TimeEntryCreateRequest timeEntryRequest)
+    public List<TimeEntryResponse> CreateTimeEntry(TimeEntryCreateRequest request)
     {
-        var newEntry = new TimeEntry
-        {
-            Project = timeEntryRequest.Project,
-            Start = timeEntryRequest.Start,
-            End = timeEntryRequest.End
-        };
-
+        var newEntry = request.Adapt<TimeEntry>();
         var result = _timeEntryRepo.CreateTimeEntry(newEntry);
-        return result.Select(t => new TimeEntryResponse 
-        { 
-            Id = t.Id,
-            Project = t.Project,
-            Start = t.Start,
-            End = t.End
-        }).ToList();
+
+        return result.Adapt<List<TimeEntryResponse>>();
     }
 
     public List<TimeEntryResponse> GetAllTimeEntries()
     {
         var result = _timeEntryRepo.GetAllTimeEntries();
-        return result.Select(t => new TimeEntryResponse 
-        { 
-            Id = t.Id,
-            Project = t.Project,
-            Start = t.Start,
-            End = t.End
-        }).ToList();
+        return result.Adapt<List<TimeEntryResponse>>();
     }
 }
