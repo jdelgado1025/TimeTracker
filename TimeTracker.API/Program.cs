@@ -1,4 +1,5 @@
 using TimeTracker.API.Repositories.Time_Entry;
+using TimeTracker.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITimeEntryRepository, TimeEntryRepository>();
+builder.Services.AddScoped<ITimeEntryService, TimeEntryService>();
 
 var app = builder.Build();
 
