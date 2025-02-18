@@ -48,7 +48,7 @@ public class TimeEntryController : ControllerBase
     {
         var result = _timeEntryService.DeleteTimeEntry(id);
         if (result == null)
-            return BadRequest("Time entry with ID not found or unable to delete");
+            return NotFound("Time entry with ID not found or unable to delete");
 
         return Ok(result);
     }
