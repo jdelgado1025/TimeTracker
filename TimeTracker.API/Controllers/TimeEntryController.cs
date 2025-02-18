@@ -25,9 +25,9 @@ public class TimeEntryController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<TimeEntryResponse> GetTimeEntry(int id)
+    public ActionResult<TimeEntryResponse> GetTimeEntryById(int id)
     {
-        var result = _timeEntryService.GetTimeEntry(id);
+        var result = _timeEntryService.GetTimeEntryById(id);
         if (result is null)
             return NotFound("Time Entry with ID not found or does not exist");
 

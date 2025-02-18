@@ -37,9 +37,9 @@ public class TimeEntryService : ITimeEntryService
         return result.Adapt<List<TimeEntryResponse>>();
     }
 
-    public TimeEntryResponse? GetTimeEntry(int id)
+    public TimeEntryResponse? GetTimeEntryById(int id)
     {
-        var result = _timeEntryRepo.GetTimeEntry(id);
+        var result = _timeEntryRepo.GetTimeEntryById(id);
         if(result == null)
             return null;
 
