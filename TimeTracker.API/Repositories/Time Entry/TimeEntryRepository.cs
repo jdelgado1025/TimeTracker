@@ -24,4 +24,14 @@ public class TimeEntryRepository : ITimeEntryRepository
     {
         return _timeEntries;
     }
+
+    public List<TimeEntry>? UpdateTimeEntry(int id, TimeEntry timeEntry)
+    {
+        var timeEntryIndex = _timeEntries.FindIndex(t => t.Id == id);
+        if (_timeEntries[timeEntryIndex] == null)
+            return null;
+
+        _timeEntries[timeEntryIndex] = timeEntry;
+        return _timeEntries;
+    }
 }
