@@ -22,6 +22,15 @@ public class TimeEntryService : ITimeEntryService
         return result.Adapt<List<TimeEntryResponse>>();
     }
 
+    public List<TimeEntryResponse>? DeleteTimeEntry(int id)
+    {
+        var result = _timeEntryRepo.DeleteTimeEntry(id);
+        if (result == null)
+            return null;
+
+        return result.Adapt<List<TimeEntryResponse>>();
+    }
+
     public List<TimeEntryResponse> GetAllTimeEntries()
     {
         var result = _timeEntryRepo.GetAllTimeEntries();

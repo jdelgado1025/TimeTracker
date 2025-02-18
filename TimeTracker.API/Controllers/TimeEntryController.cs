@@ -42,4 +42,14 @@ public class TimeEntryController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpDelete("{id}")]
+    public ActionResult<List<TimeEntryResponse>> DeleteTimeEntry(int id)
+    {
+        var result = _timeEntryService.DeleteTimeEntry(id);
+        if (result == null)
+            return BadRequest("Time entry with ID not found or unable to delete");
+
+        return Ok(result);
+    }
 }
