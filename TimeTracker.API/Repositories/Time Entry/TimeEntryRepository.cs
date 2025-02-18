@@ -38,11 +38,7 @@ public class TimeEntryRepository : ITimeEntryRepository
 
     public TimeEntry? GetTimeEntryById(int id)
     {
-        var entry = _timeEntries.FirstOrDefault(x => x.Id == id);
-        if(entry == null)
-            return null;
-
-        return entry;
+        return _timeEntries.FirstOrDefault(x => x.Id == id);
     }
 
     public List<TimeEntry>? UpdateTimeEntry(int id, TimeEntry timeEntry)
