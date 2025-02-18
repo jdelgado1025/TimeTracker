@@ -20,7 +20,7 @@ public class TimeEntryRepository : ITimeEntryRepository
         return _timeEntries;
     }
 
-    public List<TimeEntry>? DeleteTimeEntry(int id, TimeEntry timeEntry)
+    public List<TimeEntry>? DeleteTimeEntry(int id)
     {
         var entry = _timeEntries.Find(x => x.Id == id);
 
