@@ -32,4 +32,14 @@ public class TimeEntryController : ControllerBase
 
         return Ok(_timeEntryService.CreateTimeEntry(timeEntry));
     }
+
+    [HttpPut("{id}")]
+    public ActionResult<List<TimeEntryResponse>>? UpdateTimeEntry(int id, TimeEntryUpdateRequest timeEntry)
+    {
+        var result = _timeEntryService.UpdateTimeEntry(id, timeEntry);
+        if (result == null)
+            return NotFound("Time Entry with the provided ID does not exist");
+
+        return Ok(result);
+    }
 }

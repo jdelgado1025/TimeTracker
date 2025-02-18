@@ -27,4 +27,15 @@ public class TimeEntryService : ITimeEntryService
         var result = _timeEntryRepo.GetAllTimeEntries();
         return result.Adapt<List<TimeEntryResponse>>();
     }
+
+    public List<TimeEntryResponse>? UpdateTimeEntry(int id, TimeEntryUpdateRequest request)
+    {
+        var updateEntry = request.Adapt<TimeEntry>();
+        var result = _timeEntryRepo.UpdateTimeEntry(id, updateEntry);
+
+        if(result == null)
+            return null;
+
+        return result.Adapt<List<TimeEntryResponse>>();
+    }
 }
