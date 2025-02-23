@@ -1,6 +1,4 @@
-﻿using TimeTracker.Domain.Entities;
-
-namespace TimeTracker.API.Repositories.Time_Entry;
+﻿namespace TimeTracker.API.Repositories.Time_Entry;
 
 public class TimeEntryRepository : ITimeEntryRepository
 {

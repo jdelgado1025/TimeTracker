@@ -1,7 +1,4 @@
 ﻿using Mapster;
-using TimeTracker.API.Repositories.Time_Entry;
-using TimeTracker.Domain.Entities;
-using TimeTracker.Domain.Models.TimeEntry;
 
 namespace TimeTracker.API.Services;
 
