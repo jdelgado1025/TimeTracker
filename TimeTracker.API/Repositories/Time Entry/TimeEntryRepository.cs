@@ -52,13 +52,19 @@ public class TimeEntryRepository : ITimeEntryRepository
         return timeEntry;
     }
 
-    public List<TimeEntry>? UpdateTimeEntry(int id, TimeEntry timeEntry)
+    public async Task<List<TimeEntry>?> UpdateTimeEntry(int id, TimeEntry timeEntry)
     {
-        var timeEntryIndex = _timeEntries.FindIndex(t => t.Id == id);
-        if (timeEntryIndex == -1)
+        var dbTimeEntry = await _context.TimeEntries.FindAsync(id);
+        if (dbTimeEntry == null)
             return null;
 
-        _timeEntries[timeEntryIndex] = timeEntry;
-        return _timeEntries;
+        dbTimeEntry.Project = timeEntry.Project;
+        dbTimeEntry.Start = timeEntry.Start;
+        dbTimeEntry.End = timeEntry.End;
+        dbTimeEntry.DateUpdated = DateTime.Now;
+
+        await _context.SaveChangesAsync();
+
+        return await GetAllTimeEntries();
     }
 }

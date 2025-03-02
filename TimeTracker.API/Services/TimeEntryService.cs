@@ -43,10 +43,10 @@ public class TimeEntryService : ITimeEntryService
         return result.Adapt<TimeEntryResponse>();
     }
 
-    public List<TimeEntryResponse>? UpdateTimeEntry(int id, TimeEntryUpdateRequest request)
+    public async Task<List<TimeEntryResponse>?> UpdateTimeEntry(int id, TimeEntryUpdateRequest request)
     {
         var updateEntry = request.Adapt<TimeEntry>();
-        var result = _timeEntryRepo.UpdateTimeEntry(id, updateEntry);
+        var result = await _timeEntryRepo.UpdateTimeEntry(id, updateEntry);
 
         if(result == null)
             return null;

@@ -39,9 +39,9 @@ public class TimeEntryController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public ActionResult<List<TimeEntryResponse>>? UpdateTimeEntry(int id, TimeEntryUpdateRequest timeEntry)
+    public async Task<ActionResult<List<TimeEntryResponse>>?> UpdateTimeEntry(int id, TimeEntryUpdateRequest timeEntry)
     {
-        var result = _timeEntryService.UpdateTimeEntry(id, timeEntry);
+        var result = await _timeEntryService.UpdateTimeEntry(id, timeEntry);
         if (result == null)
             return NotFound("Time Entry with the provided ID does not exist");
 
