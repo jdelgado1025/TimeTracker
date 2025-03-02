@@ -30,12 +30,12 @@ public class TimeEntryController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<List<TimeEntryResponse>> CreateTimeEntry(TimeEntryCreateRequest timeEntry)
+    public async Task<ActionResult<List<TimeEntryResponse>>> CreateTimeEntry(TimeEntryCreateRequest timeEntry)
     {
         if (timeEntry == null)
             return BadRequest("Invalid Time Entry");
 
-        return Ok(_timeEntryService.CreateTimeEntry(timeEntry));
+        return Ok(await _timeEntryService.CreateTimeEntry(timeEntry));
     }
 
     [HttpPut("{id}")]

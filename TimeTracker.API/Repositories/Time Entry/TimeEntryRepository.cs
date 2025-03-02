@@ -1,7 +1,16 @@
-﻿namespace TimeTracker.API.Repositories.Time_Entry;
+﻿using System.Reflection.Metadata;
+
+namespace TimeTracker.API.Repositories.Time_Entry;
 
 public class TimeEntryRepository : ITimeEntryRepository
 {
+    private readonly DataContext _context;
+
+    public TimeEntryRepository(DataContext context)
+    {
+        _context = context;
+    }
+
     private static List<TimeEntry> _timeEntries = new List<TimeEntry>
     {
         new TimeEntry
@@ -12,10 +21,12 @@ public class TimeEntryRepository : ITimeEntryRepository
         }
     };
 
-    public List<TimeEntry> CreateTimeEntry(TimeEntry timeEntry)
+    public async Task<List<TimeEntry>> CreateTimeEntry(TimeEntry timeEntry)
     {
-        _timeEntries.Add(timeEntry);
-        return _timeEntries;
+        _context.TimeEntries.Add(timeEntry);
+        await _context.SaveChangesAsync();
+
+        return await _context.TimeEntries.ToListAsync();
     }
 
     public List<TimeEntry>? DeleteTimeEntry(int id)
