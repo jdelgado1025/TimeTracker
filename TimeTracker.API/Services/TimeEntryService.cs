@@ -28,15 +28,15 @@ public class TimeEntryService : ITimeEntryService
         return result.Adapt<List<TimeEntryResponse>>();
     }
 
-    public List<TimeEntryResponse> GetAllTimeEntries()
+    public async Task<List<TimeEntryResponse>> GetAllTimeEntries()
     {
-        var result = _timeEntryRepo.GetAllTimeEntries();
+        var result = await _timeEntryRepo.GetAllTimeEntries();
         return result.Adapt<List<TimeEntryResponse>>();
     }
 
-    public TimeEntryResponse? GetTimeEntryById(int id)
+    public async Task<TimeEntryResponse?> GetTimeEntryById(int id)
     {
-        var result = _timeEntryRepo.GetTimeEntryById(id);
+        var result = await _timeEntryRepo.GetTimeEntryById(id);
         if(result == null)
             return null;
 

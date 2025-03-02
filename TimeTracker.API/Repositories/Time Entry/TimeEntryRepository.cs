@@ -40,14 +40,16 @@ public class TimeEntryRepository : ITimeEntryRepository
         return _timeEntries;
     }
 
-    public List<TimeEntry> GetAllTimeEntries()
+    public async Task<List<TimeEntry>> GetAllTimeEntries()
     {
-        return _timeEntries;
+        return await _context.TimeEntries.ToListAsync();
     }
 
-    public TimeEntry? GetTimeEntryById(int id)
+    public async Task<TimeEntry?> GetTimeEntryById(int id)
     {
-        return _timeEntries.FirstOrDefault(x => x.Id == id);
+        var timeEntry = await _context.TimeEntries.FindAsync(id);
+
+        return timeEntry;
     }
 
     public List<TimeEntry>? UpdateTimeEntry(int id, TimeEntry timeEntry)
