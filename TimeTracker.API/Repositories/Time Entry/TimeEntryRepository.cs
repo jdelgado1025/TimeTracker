@@ -29,15 +29,17 @@ public class TimeEntryRepository : ITimeEntryRepository
         return await _context.TimeEntries.ToListAsync();
     }
 
-    public List<TimeEntry>? DeleteTimeEntry(int id)
+    public async Task<List<TimeEntry>?> DeleteTimeEntry(int id)
     {
-        var entry = _timeEntries.Find(x => x.Id == id);
+        var entry = await _context.TimeEntries.FindAsync(id);
 
         if (entry == null)
             return null;
 
-        _timeEntries.Remove(entry);
-        return _timeEntries;
+        _context.TimeEntries.Remove(entry);
+        await _context.SaveChangesAsync();
+
+        return await GetAllTimeEntries();
     }
 
     public async Task<List<TimeEntry>> GetAllTimeEntries()

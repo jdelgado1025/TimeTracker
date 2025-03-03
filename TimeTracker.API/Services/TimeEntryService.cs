@@ -19,9 +19,9 @@ public class TimeEntryService : ITimeEntryService
         return result.Adapt<List<TimeEntryResponse>>();
     }
 
-    public List<TimeEntryResponse>? DeleteTimeEntry(int id)
+    public async Task<List<TimeEntryResponse>?> DeleteTimeEntry(int id)
     {
-        var result = _timeEntryRepo.DeleteTimeEntry(id);
+        var result = await _timeEntryRepo.DeleteTimeEntry(id);
         if (result == null)
             return null;
 

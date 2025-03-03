@@ -49,9 +49,9 @@ public class TimeEntryController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public ActionResult<List<TimeEntryResponse>> DeleteTimeEntry(int id)
+    public async Task<ActionResult<List<TimeEntryResponse>>> DeleteTimeEntry(int id)
     {
-        var result = _timeEntryService.DeleteTimeEntry(id);
+        var result = await _timeEntryService.DeleteTimeEntry(id);
         if (result == null)
             return NotFound("Time entry with ID not found or unable to delete");
 
