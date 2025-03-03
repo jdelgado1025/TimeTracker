@@ -11,16 +11,6 @@ public class TimeEntryRepository : ITimeEntryRepository
         _context = context;
     }
 
-    private static List<TimeEntry> _timeEntries = new List<TimeEntry>
-    {
-        new TimeEntry
-        {
-            Id = 1,
-            Project = "Time Tracker App",
-            End = DateTime.Now.AddHours(1)
-        }
-    };
-
     public async Task<List<TimeEntry>> CreateTimeEntry(TimeEntry timeEntry)
     {
         _context.TimeEntries.Add(timeEntry);
