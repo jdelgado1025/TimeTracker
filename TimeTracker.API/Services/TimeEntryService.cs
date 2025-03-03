@@ -21,11 +21,15 @@ public class TimeEntryService : ITimeEntryService
 
     public async Task<List<TimeEntryResponse>?> DeleteTimeEntry(int id)
     {
-        var result = await _timeEntryRepo.DeleteTimeEntry(id);
-        if (result == null)
+        try
+        {
+            var result = await _timeEntryRepo.DeleteTimeEntry(id);
+            return result.Adapt<List<TimeEntryResponse>>();
+        }
+        catch (EntityNotFoundException)
+        {
             return null;
-
-        return result.Adapt<List<TimeEntryResponse>>();
+        }
     }
 
     public async Task<List<TimeEntryResponse>> GetAllTimeEntries()
@@ -45,12 +49,17 @@ public class TimeEntryService : ITimeEntryService
 
     public async Task<List<TimeEntryResponse>?> UpdateTimeEntry(int id, TimeEntryUpdateRequest request)
     {
-        var updateEntry = request.Adapt<TimeEntry>();
-        var result = await _timeEntryRepo.UpdateTimeEntry(id, updateEntry);
+        try
+        {
+            var updateEntry = request.Adapt<TimeEntry>();
+            var result = await _timeEntryRepo.UpdateTimeEntry(id, updateEntry);
 
-        if(result == null)
+            return result.Adapt<List<TimeEntryResponse>>();
+        }
+        catch (EntityNotFoundException)
+        {
+
             return null;
-
-        return result.Adapt<List<TimeEntryResponse>>();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Reflection.Metadata;
 
+
 namespace TimeTracker.API.Repositories.Time_Entry;
 
 public class TimeEntryRepository : ITimeEntryRepository
@@ -23,8 +24,8 @@ public class TimeEntryRepository : ITimeEntryRepository
     {
         var entry = await _context.TimeEntries.FindAsync(id);
 
-        if (entry == null)
-            return null;
+        if (entry is null)
+            throw new EntityNotFoundException($"Entity with the given ID {id} was not found.");
 
         _context.TimeEntries.Remove(entry);
         await _context.SaveChangesAsync();
@@ -47,8 +48,8 @@ public class TimeEntryRepository : ITimeEntryRepository
     public async Task<List<TimeEntry>?> UpdateTimeEntry(int id, TimeEntry timeEntry)
     {
         var dbTimeEntry = await _context.TimeEntries.FindAsync(id);
-        if (dbTimeEntry == null)
-            return null;
+        if (dbTimeEntry is null)
+            throw new EntityNotFoundException($"Entity with ID {id} was not found.");
 
         dbTimeEntry.Project = timeEntry.Project;
         dbTimeEntry.Start = timeEntry.Start;
