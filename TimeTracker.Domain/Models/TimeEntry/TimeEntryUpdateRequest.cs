@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace TimeTracker.Domain.Models.TimeEntry;
 
-namespace TimeTracker.Domain.Models.TimeEntry;
-
-public class TimeEntryUpdateRequest
-{
-    public required string Project { get; set; }
-    public DateTime Start { get; set; } = DateTime.Now;
-    public DateTime? End { get; set; }
-}
+public record struct TimeEntryUpdateRequest
+(
+    string Project,
+    DateTime Start,
+    DateTime? End
+);
