@@ -48,7 +48,7 @@ namespace TimeTracker.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TimeEntries");
+                    b.ToTable("TimeEntries", (string)null);
                 });
 #pragma warning restore 612, 618
         }
