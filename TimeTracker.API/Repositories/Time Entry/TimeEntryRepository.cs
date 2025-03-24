@@ -17,7 +17,7 @@ public class TimeEntryRepository : ITimeEntryRepository
         _context.TimeEntries.Add(timeEntry);
         await _context.SaveChangesAsync();
 
-        return await _context.TimeEntries.ToListAsync();
+        return await GetAllTimeEntries();
     }
 
     public async Task<List<TimeEntry>?> DeleteTimeEntry(int id)
@@ -35,12 +35,16 @@ public class TimeEntryRepository : ITimeEntryRepository
 
     public async Task<List<TimeEntry>> GetAllTimeEntries()
     {
-        return await _context.TimeEntries.ToListAsync();
+        return await _context.TimeEntries
+            .Include(t => t.Project)
+            .ToListAsync();
     }
 
     public async Task<TimeEntry?> GetTimeEntryById(int id)
     {
-        var timeEntry = await _context.TimeEntries.FindAsync(id);
+        var timeEntry = await _context.TimeEntries
+            .Include(t => t.Project)
+            .FirstOrDefaultAsync(t => t.Id == id);
 
         return timeEntry;
     }
@@ -51,7 +55,7 @@ public class TimeEntryRepository : ITimeEntryRepository
         if (dbTimeEntry is null)
             throw new EntityNotFoundException($"Entity with ID {id} was not found.");
 
-        dbTimeEntry.Project = timeEntry.Project;
+        dbTimeEntry.ProjectId = timeEntry.ProjectId;
         dbTimeEntry.Start = timeEntry.Start;
         dbTimeEntry.End = timeEntry.End;
         dbTimeEntry.DateUpdated = DateTime.Now;
