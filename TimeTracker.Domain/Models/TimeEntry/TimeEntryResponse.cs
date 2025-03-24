@@ -1,9 +1,11 @@
-﻿namespace TimeTracker.Domain.Models.TimeEntry;
+﻿using TimeTracker.Domain.Models.Project;
+
+namespace TimeTracker.Domain.Models.TimeEntry;
 
 public record struct TimeEntryResponse
 (
     int Id,
-    string Project,
+    ProjectResponse Project,
     DateTime Start,
     DateTime? End
 );

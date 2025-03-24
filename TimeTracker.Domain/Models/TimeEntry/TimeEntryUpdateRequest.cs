@@ -2,7 +2,7 @@
 
 public record struct TimeEntryUpdateRequest
 (
-    string Project,
+    int ProjectId,
     DateTime Start,
     DateTime? End
 );

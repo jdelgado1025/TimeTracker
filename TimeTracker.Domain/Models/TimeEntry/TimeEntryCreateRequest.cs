@@ -3,7 +3,7 @@
 /* Data Transfer Object for Time Entry Request */
 public record struct TimeEntryCreateRequest
 (
-    string Project,
+    int ProjectId,
     DateTime Start,
     DateTime? End
 );
