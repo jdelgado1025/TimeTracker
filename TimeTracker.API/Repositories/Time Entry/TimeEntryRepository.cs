@@ -37,6 +37,7 @@ public class TimeEntryRepository : ITimeEntryRepository
     {
         return await _context.TimeEntries
             .Include(t => t.Project)
+            .ThenInclude(t => t.ProjectDetails)
             .ToListAsync();
     }
 
@@ -44,6 +45,7 @@ public class TimeEntryRepository : ITimeEntryRepository
     {
         var timeEntry = await _context.TimeEntries
             .Include(t => t.Project)
+            .ThenInclude(t => t.ProjectDetails)
             .FirstOrDefaultAsync(t => t.Id == id);
 
         return timeEntry;
