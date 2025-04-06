@@ -17,4 +17,14 @@ public class ProjectController : ControllerBase
 	{
 		return Ok(await _projectService.GetAllProjects());
 	}
+
+	[HttpGet("{id}")]
+	public async Task<ActionResult<ProjectResponse>> GetProjectById(int id)
+	{
+		var result = await _projectService.GetProjectById(id);
+		if(result is null)
+			return NotFound("Project with ID not found or does not exist");
+
+		return Ok(result);
+	}
 }

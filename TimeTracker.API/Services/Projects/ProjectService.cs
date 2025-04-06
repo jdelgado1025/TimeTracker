@@ -15,4 +15,13 @@ public class ProjectService : IProjectService
         var result = await _projectRepository.GetAllProjects();
         return result.Adapt<List<ProjectResponse>>();
     }
+
+    public async Task<ProjectResponse?> GetProjectById(int id)
+    {
+        var result = await _projectRepository.GetProjectById(id);
+        if (result == null)
+            return null;
+
+        return result.Adapt<ProjectResponse>();
+    }
 }

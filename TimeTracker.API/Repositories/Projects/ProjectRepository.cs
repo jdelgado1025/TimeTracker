@@ -26,9 +26,11 @@ public class ProjectRepository : IProjectRepository
             .ToListAsync();
     }
 
-    public Task<Project?> GetProjectById(int id)
+    public async Task<Project?> GetProjectById(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Projects
+            .Include(p => p.ProjectDetails)
+            .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public Task<List<TimeEntry>> GetTimeEntriesByProject(int id)

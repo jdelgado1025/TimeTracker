@@ -3,4 +3,5 @@
 public interface IProjectService
 {
     Task<List<ProjectResponse>> GetAllProjects();
+    Task<ProjectResponse?> GetProjectById(int id);
 }
