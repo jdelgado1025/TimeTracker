@@ -1,7 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-
-namespace TimeTracker.API.Repositories.Time_Entry;
+﻿namespace TimeTracker.API.Repositories.Time_Entry;
 
 public class TimeEntryRepository : ITimeEntryRepository
 {

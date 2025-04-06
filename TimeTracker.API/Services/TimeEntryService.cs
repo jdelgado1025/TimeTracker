@@ -1,6 +1,4 @@
-﻿using Mapster;
-
-namespace TimeTracker.API.Services;
+﻿namespace TimeTracker.API.Services;
 
 public class TimeEntryService : ITimeEntryService
 {

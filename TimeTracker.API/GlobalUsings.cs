@@ -1,8 +1,11 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 global using TimeTracker.Domain.Entities;
 global using TimeTracker.API.Services;
+global using TimeTracker.API.Services.Projects;
 global using TimeTracker.Domain.Models.TimeEntry;
+global using TimeTracker.Domain.Models.Project;
 global using TimeTracker.Domain.Exceptions;
 global using TimeTracker.API.Data;
 global using TimeTracker.API.Repositories.Time_Entry;
 global using TimeTracker.API.Repositories.Projects;
+global using Mapster;
