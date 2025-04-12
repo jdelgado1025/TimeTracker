@@ -31,6 +31,7 @@ public class ProjectRepository : IProjectRepository
     {
         var project = await _context.Projects
             .Include(p => p.ProjectDetails)
+            .Where (p => p.IsDeleted == false)
             .FirstOrDefaultAsync(p => p.Id == id);
 
         return project;
@@ -41,6 +42,7 @@ public class ProjectRepository : IProjectRepository
         return await _context.Projects
             .Include(p => p.ProjectDetails)
             .Include(p => p.TimeEntries)
+            .Where( p => p.IsDeleted == false)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
