@@ -14,9 +14,18 @@ public class ProjectRepository : IProjectRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<Project>?> DeleteProject(int id)
+    public async Task<List<Project>?> DeleteProject(int id)
     {
-        throw new NotImplementedException();
+        var project = await _context.Projects.FindAsync(id);
+
+        if (project is null)
+            throw new EntityNotFoundException($"Entity with the given ID {id} was not found.");
+
+        project.IsDeleted = true;
+        project.DateDeleted = DateTime.Now;
+        await _context.SaveChangesAsync();
+
+        return await GetAllProjects();
     }
 
     public async Task<List<Project>> GetAllProjects()

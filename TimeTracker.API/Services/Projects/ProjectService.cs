@@ -10,6 +10,19 @@ public class ProjectService : IProjectService
         _projectRepository = projectRepository;
     }
 
+    public async Task<List<ProjectResponse>?> DeleteProject(int id)
+    {
+        try
+        {
+            var result = await _projectRepository.DeleteProject(id);
+            return result.Adapt<List<ProjectResponse>>();
+        }
+        catch (EntityNotFoundException)
+        {
+            return null;
+        }
+    }
+
     public async Task<List<ProjectResponse>> GetAllProjects()
     {
         var result = await _projectRepository.GetAllProjects();
