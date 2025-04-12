@@ -23,6 +23,7 @@ public class ProjectRepository : IProjectRepository
     {
         return await _context.Projects
             .Include(p => p.ProjectDetails)
+            .Where(p => p.IsDeleted == false)
             .ToListAsync();
     }
 
