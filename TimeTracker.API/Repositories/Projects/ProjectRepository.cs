@@ -28,14 +28,19 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<Project?> GetProjectById(int id)
     {
-        return await _context.Projects
+        var project = await _context.Projects
             .Include(p => p.ProjectDetails)
             .FirstOrDefaultAsync(p => p.Id == id);
+
+        return project;
     }
 
-    public Task<List<TimeEntry>> GetTimeEntriesByProject(int id)
+    public async Task<Project?> GetTimeEntriesByProject(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Projects
+            .Include(p => p.ProjectDetails)
+            .Include(p => p.TimeEntries)
+            .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public Task<List<Project>?> UpdateProject(int id, Project project)
