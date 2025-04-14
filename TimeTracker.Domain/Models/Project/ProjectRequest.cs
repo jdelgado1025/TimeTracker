@@ -1,4 +1,8 @@
 ﻿namespace TimeTracker.Domain.Models.Project;
-public class ProjectRequest
-{
-}
+public record struct ProjectRequest
+(
+    string Name,
+    string? Description,
+    DateTime? StartDate,
+    DateTime? EndDate
+);
