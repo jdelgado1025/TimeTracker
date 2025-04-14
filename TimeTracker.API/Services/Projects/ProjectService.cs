@@ -45,4 +45,19 @@ public class ProjectService : IProjectService
 
         return result.Adapt<ProjectResponse>();
     }
+
+    public async Task<List<ProjectResponse>?> UpdateProject(int id, ProjectRequest request)
+    {
+        try
+        {
+            var updateProject = request.Adapt<Project>();
+            var result = _projectRepository.UpdateProject(id, updateProject);
+
+            return result.Adapt<List<ProjectResponse>>();
+        }
+        catch (EntityNotFoundException)
+        {
+            return null;
+        }
+    }
 }

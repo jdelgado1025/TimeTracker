@@ -6,4 +6,5 @@ public interface IProjectService
     Task<ProjectResponse?> GetProjectById(int id);
     Task<List<ProjectResponse>?> DeleteProject(int id);
     Task<List<ProjectResponse>> CreateProject(ProjectRequest request);
+    Task<List<ProjectResponse>?> UpdateProject(int id, ProjectRequest request);
 }

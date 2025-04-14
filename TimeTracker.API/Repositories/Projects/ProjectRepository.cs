@@ -58,8 +58,20 @@ public class ProjectRepository : IProjectRepository
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public Task<List<Project>?> UpdateProject(int id, Project project)
+    public async Task<List<Project>?> UpdateProject(int id, Project project)
     {
-        throw new NotImplementedException();
+        var projectEntry = await _context.Projects.FindAsync(id);
+        if (projectEntry is null)
+            throw new EntityNotFoundException($"Entity with ID {id} was not found.");
+
+        projectEntry.Name = project.Name;
+        projectEntry.ProjectDetails.Description = project.ProjectDetails.Description;
+        projectEntry.ProjectDetails.StartDate = project.ProjectDetails.StartDate;
+        projectEntry.ProjectDetails.EndDate = project.ProjectDetails.EndDate;
+        projectEntry.DateUpdated = DateTime.Now;
+
+        await _context.SaveChangesAsync();
+
+        return await GetAllProjects();
     }
 }

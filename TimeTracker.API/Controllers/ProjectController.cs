@@ -46,4 +46,14 @@ public class ProjectController : ControllerBase
 
 		return Ok(await _projectService.CreateProject(project));
 	}
+
+    [HttpPut]
+    public async Task<ActionResult<List<ProjectResponse>>> UpdateProject(int id, ProjectRequest project)
+    {
+        var result = await _projectService.UpdateProject(id, project);
+		if (result is null)
+			return NotFound($"Project with ID ({id}) does not exist");
+
+        return Ok(result);
+    }
 }
