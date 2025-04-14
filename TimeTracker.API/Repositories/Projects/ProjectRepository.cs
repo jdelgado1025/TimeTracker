@@ -9,9 +9,12 @@ public class ProjectRepository : IProjectRepository
         _context = context;
     }
 
-    public Task<List<Project>> CreateProject(Project project)
+    public async Task<List<Project>> CreateProject(Project project)
     {
-        throw new NotImplementedException();
+        _context.Projects.Add(project);
+        await _context.SaveChangesAsync();
+
+        return await GetAllProjects();
     }
 
     public async Task<List<Project>?> DeleteProject(int id)

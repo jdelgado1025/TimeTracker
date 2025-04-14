@@ -10,6 +10,14 @@ public class ProjectService : IProjectService
         _projectRepository = projectRepository;
     }
 
+    public async Task<List<ProjectResponse>> CreateProject(ProjectRequest request)
+    {
+        var newProject = request.Adapt<Project>();
+        var result = await _projectRepository.CreateProject(newProject);
+
+        return result.Adapt<List<ProjectResponse>>();
+    }
+
     public async Task<List<ProjectResponse>?> DeleteProject(int id)
     {
         try

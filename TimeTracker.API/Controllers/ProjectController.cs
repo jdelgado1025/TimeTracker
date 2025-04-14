@@ -37,4 +37,13 @@ public class ProjectController : ControllerBase
 
 		return Ok(result);
 	}
+
+	[HttpPost]
+	public async Task<ActionResult<List<ProjectResponse>>> CreateProject(ProjectRequest project)
+	{
+		if (project == null)
+			return BadRequest("Invalid Project Entry");
+
+		return Ok(await _projectService.CreateProject(project));
+	}
 }
