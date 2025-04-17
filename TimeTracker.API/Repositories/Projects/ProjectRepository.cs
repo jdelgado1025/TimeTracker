@@ -19,7 +19,9 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<List<Project>?> DeleteProject(int id)
     {
-        var project = await _context.Projects.FindAsync(id);
+        var project = await _context.Projects
+            .Where(p => p.IsDeleted == false)
+            .FirstOrDefaultAsync(p => p.Id == id);
 
         if (project is null)
             throw new EntityNotFoundException($"Entity with the given ID {id} was not found.");
