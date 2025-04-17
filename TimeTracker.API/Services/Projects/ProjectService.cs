@@ -51,7 +51,7 @@ public class ProjectService : IProjectService
         try
         {
             var updateProject = request.Adapt<Project>();
-            var result = _projectRepository.UpdateProject(id, updateProject);
+            var result = await _projectRepository.UpdateProject(id, updateProject);
 
             return result.Adapt<List<ProjectResponse>>();
         }
