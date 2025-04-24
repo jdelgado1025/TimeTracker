@@ -7,6 +7,11 @@ public class DataContext: DbContext
         
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        //Can Auto Include Entities for table relationships here
+    }
+
     public DbSet<TimeEntry> TimeEntries { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<ProjectDetails> ProjectDetails { get; set; }
