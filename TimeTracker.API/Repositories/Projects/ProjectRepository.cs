@@ -70,17 +70,26 @@ public class ProjectRepository : IProjectRepository
         if (projectEntry is null)
             throw new EntityNotFoundException($"Entity with ID {id} was not found.");
 
-        projectEntry.Name = project.Name;
-
-        if(project.ProjectDetails.Description is not null)
+        if(projectEntry.ProjectDetails != null && project.ProjectDetails != null)
+        {
             projectEntry.ProjectDetails.Description = project.ProjectDetails.Description;
-
-        if(project.ProjectDetails.StartDate is not null)
             projectEntry.ProjectDetails.StartDate = project.ProjectDetails.StartDate;
-
-        if(project.ProjectDetails.EndDate is not null)
             projectEntry.ProjectDetails.EndDate = project.ProjectDetails.EndDate;
+        }
 
+        if(project.ProjectDetails != null && projectEntry.ProjectDetails == null)
+        {
+            //If the existing Project does not have existing Project Details, we need to create them
+            projectEntry.ProjectDetails = new ProjectDetails
+            {
+                Description = project.ProjectDetails.Description,
+                StartDate = project.ProjectDetails.StartDate,
+                EndDate = project.ProjectDetails.EndDate,
+                Project = project
+            };
+        }
+
+        projectEntry.Name = project.Name;
         projectEntry.DateUpdated = DateTime.Now;
 
         await _context.SaveChangesAsync();
