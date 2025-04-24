@@ -28,6 +28,7 @@ public class ProjectRepository : IProjectRepository
 
         project.IsDeleted = true;
         project.DateDeleted = DateTime.Now;
+
         await _context.SaveChangesAsync();
 
         return await GetAllProjects();
