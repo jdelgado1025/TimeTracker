@@ -35,6 +35,10 @@ app.Run();
 
 void ConfigureMapster()
 {
+    TypeAdapterConfig<ProjectRequest, Project>.NewConfig()
+        .Map(dest => dest.ProjectDetails.Description, src => src.Description != null ? src.Description : null)
+        .Map(dest => dest.ProjectDetails.StartDate, src => src.StartDate != null ? src.StartDate : null)
+        .Map(dest => dest.ProjectDetails.EndDate, src => src.EndDate != null ? src.EndDate : null);
     TypeAdapterConfig<Project, ProjectResponse>.NewConfig()
         .Map(dest => dest.Description, src => src.ProjectDetails != null ? src.ProjectDetails.Description : null)
         .Map(dest => dest.StartDate, src => src.ProjectDetails != null ? src.ProjectDetails.StartDate : null)
