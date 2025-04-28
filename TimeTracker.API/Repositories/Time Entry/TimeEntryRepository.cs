@@ -38,6 +38,13 @@ public class TimeEntryRepository : ITimeEntryRepository
             .ToListAsync();
     }
 
+    public async Task<List<TimeEntry>> GetTimeEntriesByProject(int projectId)
+    {
+        return await _context.TimeEntries
+            .Where(t => t.ProjectId == projectId)
+            .ToListAsync();
+    }
+
     public async Task<TimeEntry?> GetTimeEntryById(int id)
     {
         var timeEntry = await _context.TimeEntries
