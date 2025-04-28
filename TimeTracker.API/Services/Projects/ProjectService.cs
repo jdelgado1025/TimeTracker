@@ -46,6 +46,18 @@ public class ProjectService : IProjectService
         return result.Adapt<ProjectResponse>();
     }
 
+    public async Task<ProjectTimeEntriesResponse?> GetTimeEntriesByProject(int id)
+    {
+        var project = await _projectRepository.GetTimeEntriesByProject(id);
+        if (project is null)
+            return null;
+
+        var response = project.Adapt<ProjectTimeEntriesResponse>();
+        response.TimeEntries = project.TimeEntries.Adapt<List<ProjectTimeEntriesSubResponse>>();
+
+        return response;
+    }
+
     public async Task<List<ProjectResponse>?> UpdateProject(int id, ProjectRequest request)
     {
         try
