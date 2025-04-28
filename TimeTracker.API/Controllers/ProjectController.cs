@@ -28,7 +28,17 @@ public class ProjectController : ControllerBase
 		return Ok(result);
 	}
 
-	[HttpDelete("{id}")]
+    [HttpGet("{id}/timeEntries")]
+    public async Task<ActionResult<ProjectTimeEntriesResponse>> GetTimeEntriesByProject(int id)
+    {
+        var result = await _projectService.GetTimeEntriesByProject(id);                                                                                                                                                                                                                                                                
+        if (result is null)
+            return NotFound("Project with ID not found or does not exist");
+
+        return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
 	public async Task<ActionResult<List<ProjectResponse>>> DeleteProject(int id)
 	{
 		var result = await _projectService.DeleteProject(id);
