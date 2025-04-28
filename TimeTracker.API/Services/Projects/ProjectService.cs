@@ -46,9 +46,9 @@ public class ProjectService : IProjectService
         return result.Adapt<ProjectResponse>();
     }
 
-    public async Task<ProjectTimeEntriesResponse?> GetTimeEntriesByProject(int id)
+    public async Task<ProjectTimeEntriesResponse?> GetProjectWithTimeEntries(int id)
     {
-        var project = await _projectRepository.GetTimeEntriesByProject(id);
+        var project = await _projectRepository.GetProjectWithTimeEntries(id);
         if (project is null)
             return null;
 

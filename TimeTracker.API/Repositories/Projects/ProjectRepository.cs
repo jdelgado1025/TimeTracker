@@ -52,7 +52,7 @@ public class ProjectRepository : IProjectRepository
         return project;
     }
 
-    public async Task<Project?> GetTimeEntriesByProject(int id)
+    public async Task<Project?> GetProjectWithTimeEntries(int id)
     {
         return await _context.Projects
             .Include(p => p.ProjectDetails)

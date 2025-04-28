@@ -29,9 +29,9 @@ public class ProjectController : ControllerBase
 	}
 
     [HttpGet("{id}/timeEntries")]
-    public async Task<ActionResult<ProjectTimeEntriesResponse>> GetTimeEntriesByProject(int id)
+    public async Task<ActionResult<ProjectTimeEntriesResponse>> GetProjectWithTimeEntries(int id)
     {
-        var result = await _projectService.GetTimeEntriesByProject(id);                                                                                                                                                                                                                                                                
+        var result = await _projectService.GetProjectWithTimeEntries(id);                                                                                                                                                                                                                                                                
         if (result is null)
             return NotFound("Project with ID not found or does not exist");
 
