@@ -13,6 +13,7 @@ public class ProjectService : IProjectService
     public async Task<List<ProjectResponse>> CreateProject(ProjectRequest request)
     {
         var newProject = request.Adapt<Project>();
+
         var result = await _projectRepository.CreateProject(newProject);
 
         return result.Adapt<List<ProjectResponse>>();
