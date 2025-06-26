@@ -4,6 +4,35 @@
 <PageTitle>Time Entries</PageTitle>
 <h3>Time Entries</h3>
 
+@if (timeEntries == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Duration</th>
+                <th>Project</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var timeEntry in timeEntries)
+            {
+                <tr>
+                    <td>@timeEntry.Start</td>
+                    <td>@timeEntry.End</td>
+                    <td>@GetDuration(timeEntry.Start, timeEntry.End)</td>
+                    <td>@timeEntry.Project.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 @code {
     private List<TimeEntryResponse> timeEntries = new List<TimeEntryResponse>();
 
