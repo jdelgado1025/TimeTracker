@@ -48,7 +48,7 @@ else
         if(start is not null && end is not null)
         {
             var duration = end.Value - start.Value;
-            var result = $"{duration.Hours}h {duration.Minutes}m";
+            var result = (duration.Days == 0) ? $"{duration.Hours}h {duration.Minutes}m" : $"{duration.Days}d {duration.Hours}h {duration.Minutes}m";
             return result;
         }
 
