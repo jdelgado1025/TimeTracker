@@ -1,4 +1,5 @@
 ﻿@page "/timeentries"
+@using TimeTracker.Client.Shared;
 @inject HttpClient Http
 
 <PageTitle>Time Entries</PageTitle>
@@ -10,6 +11,8 @@
 }
 else
 {
+    <ProjectSelector ProjectSelected="ProjectChanged" />
+
     <table class="table">
         <thead>
             <tr>
@@ -74,5 +77,18 @@ else
 
         projectId = id;
         StateHasChanged(); //Forces component to re-render
+    }
+
+    private async Task ProjectChanged(int projectId)
+    {
+        List<TimeEntryResponse>? result = null;
+
+        if (projectId == 0)
+            result = await Http.GetFromJsonAsync<List<TimeEntryResponse>>("api/timeentries");
+        else
+            result = await Http.GetFromJsonAsync<List<TimeEntryResponse>>($"api/timeentry/project/{projectId}");
+
+        if (result is not null)
+            timeEntries = result;
     }
 }
